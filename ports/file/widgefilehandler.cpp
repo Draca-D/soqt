@@ -49,11 +49,11 @@ void WidgeFileHandler::populateConfiguration(QXmlStreamWriter &writer)
 void WidgeFileHandler::loadConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "file"){
+        if(reader.name().toString() == "file"){
             ui->in_fileLoc->setText(reader.readElementText());
-        }else if(reader.name() == "rate"){
+        }else if(reader.name().toString() == "rate"){
             ui->in_rate->setText(reader.readElementText());
-        }else if(reader.name() == "type"){
+        }else if(reader.name().toString() == "type"){
             auto type = reader.readElementText();
             if(type == "writer"){
                 ui->in_writer->setChecked(true);

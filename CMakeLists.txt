@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Svg)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS SvgWidgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS SerialPort)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Network)
 
@@ -135,7 +135,7 @@ endif()
 
 target_link_libraries(soqt
     PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-    PRIVATE Qt${QT_VERSION_MAJOR}::Svg
+    PRIVATE Qt${QT_VERSION_MAJOR}::SvgWidgets
     PRIVATE Qt${QT_VERSION_MAJOR}::SerialPort
     PRIVATE Qt${QT_VERSION_MAJOR}::Network)
 

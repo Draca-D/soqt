@@ -12,7 +12,7 @@ void GenericTrigger::populateConfiguration(QXmlStreamWriter &writer){
 
 void GenericTrigger::loadConfiguration(QXmlStreamReader &reader){
     while(reader.readNextStartElement()){
-        if(reader.name() == "None"){
+        if(reader.name().toString() == "None"){
             auto noneData = reader.readElementText();
             Q_UNUSED(noneData);
         }else{

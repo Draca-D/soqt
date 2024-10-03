@@ -68,16 +68,16 @@ void GenericPort::createConfiguration(QXmlStreamWriter &writer)
 void GenericPort::loadFromConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "Settings"){
+        if(reader.name().toString() == "Settings"){
             while(reader.readNextStartElement()){
                 auto pos = findSetting(reader.name().toString());
-                if(reader.name() == "WidgeConfig"){
+                if(reader.name().toString() == "WidgeConfig"){
                     loadConfiguration(reader);
-                }else if(reader.name() == "enable_delay"){
+                }else if(reader.name().toString() == "enable_delay"){
                     settings_.enable_delay(reader.readElementText().toInt());
-                }else if(reader.name() == "enable_split"){
+                }else if(reader.name().toString() == "enable_split"){
                     settings_.enable_split(reader.readElementText().toInt());
-                }else if(reader.name() == "split_on"){
+                }else if(reader.name().toString() == "split_on"){
                     auto charSplit = reader.readElementText().split(",");
                     QList<char> split_on_;
 
@@ -93,7 +93,7 @@ void GenericPort::loadFromConfiguration(QXmlStreamReader &reader)
                     }
 
                     settings_.set_split_on(split_on_);
-                }else if(reader.name() == "delay_value"){
+                }else if(reader.name().toString() == "delay_value"){
                     settings_.set_delay(reader.readElementText().toInt());
                 }else if(pos > -1){
                     settings_list_.at(pos).setter_(reader.readElementText());
@@ -113,7 +113,7 @@ void GenericPort::populateConfiguration(QXmlStreamWriter &writer){
 
 void GenericPort::loadConfiguration(QXmlStreamReader &reader){
     while(reader.readNextStartElement()){
-        if(reader.name() == "empty"){
+        if(reader.name().toString() == "empty"){
             reader.skipCurrentElement();
         }else{
             reader.skipCurrentElement();

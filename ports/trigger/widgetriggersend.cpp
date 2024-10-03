@@ -54,9 +54,9 @@ void WidgeTriggerSend::populateConfiguration(QXmlStreamWriter &writer)
 void WidgeTriggerSend::loadConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "data"){
+        if(reader.name() == QStringLiteral("data")){
             ui->in_data->setText(reader.readElementText());
-        }else if(reader.name() == "hex"){
+        }else if(reader.name() == QStringLiteral("hex")){
             auto type = reader.readElementText();
             if(type == "true"){
                 ui->in_hex->setChecked(true);

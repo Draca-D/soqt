@@ -29,7 +29,7 @@ void WidgeVirtualSerial::populateConfiguration(QXmlStreamWriter &writer)
 void WidgeVirtualSerial::loadConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "port"){
+        if(reader.name().toString() == "port"){
             ui->in_name->setText(reader.readElementText());
         }else{
             reader.skipCurrentElement();

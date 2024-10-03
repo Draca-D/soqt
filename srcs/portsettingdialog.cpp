@@ -11,7 +11,7 @@ PortSettingDialog::PortSettingDialog(QWidget *parent) :
     connect(this, &PortSettingDialog::accepted, this, &PortSettingDialog::process_accepted);
 
     ui->in_delay->setValidator(new QIntValidator(0, INT_MAX));
-    ui->in_splitIn->setValidator(new QRegExpValidator(QRegExp("(\\\\?\\w,)*")));
+    ui->in_splitIn->setValidator(new QRegularExpressionValidator(QRegularExpression("(\\\\?\\w,)*")));
 
     enable_split_ = false;
     enable_delay_ = false;
@@ -299,7 +299,7 @@ void PortSettingDialog::removeAllMargins(QWidget *parent, int depth)
       continue;
     }
     if(widget->layout() != nullptr){
-      widget->layout()->setMargin(0);
+      widget->layout()->setSpacing(0);
     }
     removeAllMargins(widget, ++depth);
   }

@@ -6,7 +6,7 @@
 #include <QLineEdit>
 #include <QIntValidator>
 #include <QDoubleValidator>
-#include <QRegExpValidator>
+#include <QRegularExpressionValidator>
 #include <QIcon>
 #include <QDebug>
 #include <QComboBox>

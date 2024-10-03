@@ -34,7 +34,7 @@ void WidgeTriggerGoTo::populateConfiguration(QXmlStreamWriter &writer)
 void WidgeTriggerGoTo::loadConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "goto"){
+        if(reader.name().toString() == "goto"){
             ui->in_tag->setCurrentText(reader.readElementText());
         }else{
             reader.skipCurrentElement();

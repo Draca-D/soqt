@@ -91,9 +91,9 @@ void WidgeSerial::populateConfiguration(QXmlStreamWriter &writer)
 void WidgeSerial::loadConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "port"){
+        if(reader.name().toString() == "port"){
             ui->in_port->setText(reader.readElementText());
-        }else if(reader.name() == "baud"){
+        }else if(reader.name().toString() == "baud"){
             ui->in_baud->setText(reader.readElementText());
         }else{
             reader.skipCurrentElement();

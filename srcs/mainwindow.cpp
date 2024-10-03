@@ -321,15 +321,15 @@ std::map<QString, GenericPort *> MainWindow::addPortsFromFile(QXmlStreamReader &
     auto availablePorts = GenericPort::getAvailablePortConstructors();
 
     if (reader.readNextStartElement()) {
-        if(reader.name() == "Scene"){
+        if(reader.name().toString() == "Scene"){
             while(reader.readNextStartElement()){
-                if (reader.name() == "Ports"){
+                if (reader.name().toString() == "Ports"){
                     while(reader.readNextStartElement()){
-                        if(reader.name() == "port"){
+                        if(reader.name().toString() == "port"){
                             GenericPort *port = nullptr;
                             QString id;
                             while(reader.readNextStartElement()){
-                                if(reader.name() == "type"){
+                                if(reader.name().toString() == "type"){
                                     auto type = reader.readElementText();
                                     if(availablePorts.find(type.toStdString()) != availablePorts.end()){
                                         port = availablePorts[type.toStdString()]();
@@ -341,23 +341,23 @@ std::map<QString, GenericPort *> MainWindow::addPortsFromFile(QXmlStreamReader &
                                     if(!id.isEmpty()){
                                         ids.insert({id, port});
                                     }
-                                }else if(reader.name() == "id"){
+                                }else if(reader.name().toString() == "id"){
                                     id = reader.readElementText();
 
                                     if(port != nullptr){
 
                                         ids.insert({id, port});
                                     }
-                                }else if(reader.name() == "Rect"){
+                                }else if(reader.name().toString() == "Rect"){
                                     QRect rect;
                                     while(reader.readNextStartElement()){
-                                        if(reader.name() == "x"){
+                                        if(reader.name().toString() == "x"){
                                             rect.setX(reader.readElementText().toInt());
-                                        }else if(reader.name() == "y"){
+                                        }else if(reader.name().toString() == "y"){
                                             rect.setY(reader.readElementText().toInt());
-                                        }else if(reader.name() == "width"){
+                                        }else if(reader.name().toString() == "width"){
                                             rect.setWidth(reader.readElementText().toInt());
-                                        }else if(reader.name() == "height"){
+                                        }else if(reader.name().toString() == "height"){
                                             rect.setHeight(reader.readElementText().toInt());
                                         }else{
                                             reader.skipCurrentElement();
@@ -366,7 +366,7 @@ std::map<QString, GenericPort *> MainWindow::addPortsFromFile(QXmlStreamReader &
                                     if(port != nullptr){
                                         geos.push_back({port, rect});
                                     }
-                                }else if(reader.name() == "configuration"){
+                                }else if(reader.name().toString() == "configuration"){
                                     if(port != nullptr)
                                         port->loadFromConfiguration(reader);
                                 }else{
@@ -377,7 +377,7 @@ std::map<QString, GenericPort *> MainWindow::addPortsFromFile(QXmlStreamReader &
                             reader.skipCurrentElement();
                         }
                     }
-                } else if(reader.name() == "Connections"){
+                } else if(reader.name().toString() == "Connections"){
                     reader.skipCurrentElement();
                 }else {
                     reader.raiseError(QObject::tr("Incorrect file"));
@@ -398,27 +398,27 @@ void MainWindow::addConnectionsFromfile(QXmlStreamReader &reader, std::map<QStri
     QList<Connection> connections;
 
     if (reader.readNextStartElement()) {
-        if(reader.name() == "Scene"){
+        if(reader.name().toString() == "Scene"){
             while(reader.readNextStartElement()){
-                if (reader.name() == "Ports"){
+                if (reader.name().toString() == "Ports"){
                     reader.skipCurrentElement();
-                } else if(reader.name() == "Connections"){
+                } else if(reader.name().toString() == "Connections"){
                     while(reader.readNextStartElement()){
-                        if(reader.name() == "Connection"){
+                        if(reader.name().toString() == "Connection"){
                             while(reader.readNextStartElement()){
-                                if(reader.name() == "Direction"){
+                                if(reader.name().toString() == "Direction"){
                                     Connection connection;
                                     while(reader.readNextStartElement()){
-                                        if(reader.name() == "from"){
+                                        if(reader.name().toString() == "from"){
                                             connection.from_ = ids[reader.readElementText()];
-                                        }else if(reader.name() == "to"){
+                                        }else if(reader.name().toString() == "to"){
                                             connection.to_ = ids[reader.readElementText()];
-                                        }else if(reader.name() == "start"){
+                                        }else if(reader.name().toString() == "start"){
                                             QPoint pt;
                                             while(reader.readNextStartElement()){
-                                                if(reader.name() == "x"){
+                                                if(reader.name().toString() == "x"){
                                                     pt.setX(reader.readElementText().toInt());
-                                                }else if(reader.name() == "y"){
+                                                }else if(reader.name().toString() == "y"){
                                                     pt.setY(reader.readElementText().toInt());
                                                 }else{
                                                     reader.skipCurrentElement();
@@ -426,12 +426,12 @@ void MainWindow::addConnectionsFromfile(QXmlStreamReader &reader, std::map<QStri
                                             }
 
                                             connection.start_pos_ = pt;
-                                        }else if(reader.name() == "end"){
+                                        }else if(reader.name().toString() == "end"){
                                             QPoint pt;
                                             while(reader.readNextStartElement()){
-                                                if(reader.name() == "x"){
+                                                if(reader.name().toString() == "x"){
                                                     pt.setX(reader.readElementText().toInt());
-                                                }else if(reader.name() == "y"){
+                                                }else if(reader.name().toString() == "y"){
                                                     pt.setY(reader.readElementText().toInt());
                                                 }else{
                                                     reader.skipCurrentElement();

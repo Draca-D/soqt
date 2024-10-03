@@ -41,9 +41,9 @@ void WidgeTriggerWait::populateConfiguration(QXmlStreamWriter &writer)
 void WidgeTriggerWait::loadConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "time"){
+        if(reader.name().toString() == "time"){
             ui->in_time->setText(reader.readElementText());
-        }else if(reader.name() == "selector"){
+        }else if(reader.name().toString() == "selector"){
             ui->in_timeSelector->setCurrentText(reader.readElementText());
         }else{
             reader.skipCurrentElement();

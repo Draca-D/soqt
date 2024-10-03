@@ -42,18 +42,18 @@ void WidgeTriggerListen::populateConfiguration(QXmlStreamWriter &writer)
 void WidgeTriggerListen::loadConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "data"){
+        if(reader.name() == QStringLiteral("data")){
             ui->in_data->setText(reader.readElementText());
-        }else if(reader.name() == "type"){
+        }else if(reader.name() == QStringLiteral("type")){
             auto type = reader.readElementText();
-            if(type == "contains"){
+            if(type == QStringLiteral("contains")){
                 ui->in_contains->setChecked(true);
             }else{
                 ui->in_exact->setChecked(true);
             }
-        }else if(reader.name() == "hex"){
+        }else if(reader.name() == QStringLiteral("hex")){
             auto type = reader.readElementText();
-            if(type == "contains"){
+            if(type == QStringLiteral("contains")){
                 ui->in_hex->setChecked(true);
             }else{
                 ui->in_hex->setChecked(false);

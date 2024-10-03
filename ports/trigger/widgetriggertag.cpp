@@ -31,7 +31,7 @@ void WidgeTriggerTag::populateConfiguration(QXmlStreamWriter &writer)
 void WidgeTriggerTag::loadConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "name"){
+        if(reader.name().toString() == "name"){
             ui->in_name->setText(reader.readElementText());
         }else{
             reader.skipCurrentElement();

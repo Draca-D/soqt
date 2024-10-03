@@ -67,15 +67,15 @@ void WidgeUDP::populateConfiguration(QXmlStreamWriter &writer)
 void WidgeUDP::loadConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "remote_ip"){
+        if(reader.name().toString() == "remote_ip"){
             ui->in_remoteIP->setText(reader.readElementText());
-        }else if(reader.name() == "remote_port"){
+        }else if(reader.name().toString() == "remote_port"){
             ui->in_remotePort->setText(reader.readElementText());
-        }else if(reader.name() == "local_ip"){
+        }else if(reader.name().toString() == "local_ip"){
             ui->in_localIP->setText(reader.readElementText());
-        }else if(reader.name() == "local_port"){
+        }else if(reader.name().toString() == "local_port"){
             ui->in_localPort->setText(reader.readElementText());
-        }else if(reader.name() == "type"){
+        }else if(reader.name().toString() == "type"){
             ui->in_type_selector->setCurrentText(reader.readElementText());
         }else{
             reader.skipCurrentElement();
@@ -118,7 +118,7 @@ void WidgeUDP::on_bu_delete_clicked()
 void WidgeUDP::checkValidaton(QString text)
 {
     auto source = dynamic_cast<QLineEdit *>(sender());
-    auto pos = text.size();
+    auto pos = static_cast<int>(text.size());
 
     if(source->validator()->validate(text, pos) != QValidator::Acceptable){
         source->setStyleSheet("QLineEdit {background: red}");
@@ -129,7 +129,7 @@ void WidgeUDP::checkValidaton(QString text)
     auto children = this->findChildren<QLineEdit*>();
 
     for(auto &child:children){
-        auto subPos = child->text().size();
+        auto subPos = static_cast<int>(child->text().size());
         auto subText = child->text();
         if(child->validator()->validate(subText, subPos) != QValidator::Acceptable){
             return;

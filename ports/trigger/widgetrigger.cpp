@@ -213,19 +213,19 @@ void WidgeTrigger::loadConfiguration(QXmlStreamReader &reader)
     auto qualified_cons = GenericTrigger::getQualifiedConstructors();
 
     while(reader.readNextStartElement()){
-        if(reader.name() == "tasks"){
+        if(reader.name().toString() == "tasks"){
             while(reader.readNextStartElement()){
-                if(reader.name() == "task"){
+                if(reader.name().toString() == "task"){
                     GenericTrigger *task = nullptr;
                     while(reader.readNextStartElement()){
-                        if(reader.name() == "type"){
+                        if(reader.name().toString() == "type"){
                             auto type = reader.readElementText();
                             if(qualified_cons.find(type.toStdString()) != qualified_cons.end()){
                                 task = qualified_cons[type.toStdString()]();
                                 setupNewTask(task);
 //                                QTimer::singleShot(10, [this, task](){setupNewTask(task);});
                             }
-                        }else if(reader.name() == "configuration"){
+                        }else if(reader.name().toString() == "configuration"){
                             if(task != nullptr){
 
                                 task->loadConfiguration(reader);

@@ -42,7 +42,7 @@ WidgeTCP::~WidgeTCP()
 void WidgeTCP::checkValidaton(QString text)
 {
     auto source = dynamic_cast<QLineEdit *>(sender());
-    auto pos = text.size();
+    auto pos = static_cast<int>(text.size());
 
     if(source->validator()->validate(text, pos) != QValidator::Acceptable){
         source->setStyleSheet("QLineEdit {background: red}");
@@ -53,7 +53,7 @@ void WidgeTCP::checkValidaton(QString text)
     auto children = this->findChildren<QLineEdit*>();
 
     for(auto &child:children){
-        auto subPos = child->text().size();
+        auto subPos = static_cast<int>(child->text().size());
         auto subText = child->text();
         if(child->validator()->validate(subText, subPos) != QValidator::Acceptable){
             return;
@@ -71,11 +71,11 @@ void WidgeTCP::populateConfiguration(QXmlStreamWriter &writer)
 void WidgeTCP::loadConfiguration(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()){
-        if(reader.name() == "ip"){
+        if(reader.name().toString() == "ip"){
             ui->in_ip->setText(reader.readElementText());
-        }else if(reader.name() == "port"){
+        }else if(reader.name().toString() == "port"){
             ui->in_port->setText(reader.readElementText());
-        }else if(reader.name() == "type"){
+        }else if(reader.name().toString() == "type"){
             ui->in_type->setCurrentText(reader.readElementText());
         }else{
             reader.skipCurrentElement();
